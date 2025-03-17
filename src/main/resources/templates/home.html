@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform .3s ease-in-out, box-shadow .3s ease-in-out;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .pets {
+            padding: 40px 0;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Paws R Us</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/contact}">Contact Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/about}">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link btn btn-primary" th:href="@{/login}" style="color: white;">Login</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<section class="hero bg-primary text-white text-center">
+    <div class="container">
+        <h1 class="display-4">Welcome to Paws R Us</h1>
+        <p class="lead">Discover a world of adorable pets waiting for a loving home.</p>
+    </div>
+</section>
+
+<section class="pets">
+    <div class="container">
+        <h2 class="text-center mb-4">Available Pets</h2>
+        <div class="row">
+            <div class="col-md-4" th:each="pet : ${pets}">
+                <div class="card mb-4 shadow-sm">
+                    <img th:if="${pet.imageUrl}" th:src="${pet.imageUrl}" class="card-img-top" alt="Pet Image" style="height: 200px; object-fit: cover;">
+                    <img th:unless="${pet.imageUrl}" src="path/to/fallback/image.jpg" class="card-img-top" alt="Pet Image" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${pet.name}">Pet Name</h5>
+                        <p class="card-text">ID: <span th:text="${pet.id}">ID</span></p>
+                        <p class="card-text">Type: <span th:text="${pet.type}">Type</span></p>
+                        <p class="card-text">Age: <span th:text="${pet.age}">Age</span> years</p>
+                        <p class="card-text">Weight: <span th:text="${pet.weight}">Weight</span> kg</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
